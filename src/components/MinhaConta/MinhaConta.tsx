@@ -14,8 +14,7 @@ const usuario: Usuario = {
     foto_perfil: foto_perfil.src ,
     senha: "senha123",
 };
-
-export default function MinhaConta() {
+export default function MinhaConta(props: Usuario) {
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="minha-conta text-center">
@@ -72,7 +71,7 @@ export default function MinhaConta() {
                                 input.focus();
                             }}
                         >
-                           <img src={edit_pencil.src} alt="Edit" />
+                            <img src={edit_pencil.src} alt="Edit" />
                         </button>
                     </label>
                     <br />

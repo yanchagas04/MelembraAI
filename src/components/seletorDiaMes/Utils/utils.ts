@@ -1,5 +1,5 @@
 "use client";
-export const dias = (mes: number) => {
+export const pegarDias = (mes: number) => {
     let days = [];
     let i;
     if (mes + 1 === 2)

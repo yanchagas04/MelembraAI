@@ -1,8 +1,8 @@
 "use client"
-import { Context, createContext, Dispatch, useState } from "react";
+import { Context, createContext, Dispatch, useEffect, useState } from "react";
 import SeletorDia from "./SeletorDia";
 import SeletorMes from "./SeletorMes";
-import { dias, iniciais_meses } from "./Utils/utils";
+import { pegarDias, iniciais_meses } from "./Utils/utils";
 
 export type DataContextType = {
     dia: number,
@@ -18,6 +18,10 @@ export default function SeletorDiaMes() {
     const [dia, setDia] = useState(new Date().getDate());
     const [mes, setMes] = useState(new Date().getMonth());
     const [ano, setAno] = useState(new Date().getFullYear());
+    const [dias, setDias] = useState<number[]>(pegarDias(new Date().getMonth()));
+    useEffect(() => {
+        setDias(pegarDias(mes));
+    }, [mes]);
     return (
         <form className="w-fit flex flex-col items-center" onSubmit={(e) => e.preventDefault()}>
             <DataContext.Provider value={{
@@ -28,7 +32,7 @@ export default function SeletorDiaMes() {
                 setMes: setMes,
                 setAno: setAno
             }}>
-                <SeletorDia dias={dias(new Date().getMonth())} />
+                <SeletorDia dias={dias} />
                 <SeletorMes meses={iniciais_meses} />
             </DataContext.Provider>
         </form>

@@ -14,8 +14,7 @@ const usuario: Usuario = {
     foto_perfil: foto_perfil.src ,
     senha: "senha123",
 };
-
-export default function MinhaConta(props: Usuario) {
+export default function MinhaConta() {
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="minha-conta text-center">
@@ -34,14 +33,17 @@ export default function MinhaConta(props: Usuario) {
                             placeholder="Digite seu nome"
                             className="border rounded px-2 py-1"
                             readOnly
+                            onBlur={(e) => {
+                                e.currentTarget.readOnly = true;
+                            }}
                         />
                         <button
                             type="button"
                             className="material-icons text-black cursor-pointer"
                             onClick={(e) => {
                                 const input = (e.currentTarget.previousSibling as HTMLInputElement);
-                                input.readOnly = !input.readOnly;
-                                if (!input.readOnly) input.focus();
+                                input.readOnly = false;
+                                input.focus();
                             }}
                         >
                             <img src={edit_pencil.src} alt="Edit" />
@@ -56,17 +58,20 @@ export default function MinhaConta(props: Usuario) {
                             placeholder="Digite seu email"
                             className="border rounded px-2 py-1"
                             readOnly
+                            onBlur={(e) => {
+                                e.currentTarget.readOnly = true;
+                            }}
                         />
                         <button
                             type="button"
                             className="material-icons text-black cursor-pointer"
                             onClick={(e) => {
                                 const input = (e.currentTarget.previousSibling as HTMLInputElement);
-                                input.readOnly = !input.readOnly;
-                                if (!input.readOnly) input.focus();
+                                input.readOnly = false;
+                                input.focus();
                             }}
                         >
-                           <img src={edit_pencil.src} alt="Edit" />
+                            <img src={edit_pencil.src} alt="Edit" />
                         </button>
                     </label>
                     <br />
@@ -78,14 +83,17 @@ export default function MinhaConta(props: Usuario) {
                             placeholder="Digite sua senha"
                             className="border rounded px-2 py-1"
                             readOnly
+                            onBlur={(e) => {
+                                e.currentTarget.readOnly = true;
+                            }}
                         />
                         <button
                             type="button"
                             className="material-icons text-black cursor-pointer"
                             onClick={(e) => {
                                 const input = (e.currentTarget.previousSibling as HTMLInputElement);
-                                input.readOnly = !input.readOnly;
-                                if (!input.readOnly) input.focus();
+                                input.readOnly = false;
+                                input.focus();
                             }}
                         >
                             <img src={edit_pencil.src} alt="Edit" />

@@ -1,5 +1,5 @@
 "use client";
-import foto_perfil from "@/app/WIN_20200420_15_20_41_Pro.jpg";
+import foto_perfil from "../../../public/MinhaConta/WIN_20200420_15_20_41_Pro.jpg";
 import edit_pencil from "../../../public/MinhaConta/edit.svg"
 interface Usuario {
     nome: string,

@@ -10,18 +10,16 @@ interface TarefaItemProps {
 const TarefaItem: React.FC<TarefaItemProps> = ({ tarefa, status }) => {
   const getCorStatus = () => {
     switch (status) {
-      case 1: return styles.statusFeito; // Verde
-      case 2: return styles.statusAtrasado; // Vermelho
-      default: return styles.statusPendente; // Azul
+      case 1: return styles.statusFeito;
+      case 2: return styles.statusAtrasado;
+      default: return styles.statusPendente;
     }
   };
 
   return (
-    <div className={styles.tarefaContainer}>
+    <div className={styles.tarefaItem}>
       <div className={`${styles.statusIndicator} ${getCorStatus()}`}></div>
-      <div className={styles.tarefaBox}>
-        {tarefa}
-      </div>
+      <div className={styles.tarefaTexto}>{tarefa}</div>
     </div>
   );
 };

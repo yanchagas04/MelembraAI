@@ -3,8 +3,8 @@ export type StatusTarefa = 0 | 1 | 2; // 0 = não feita, 1 = feita, 2 = atrasada
 export interface Tarefa {
   id: number;
   tarefa: string;
-  createdAt: string;
-  scheduledTo: string;
+  // createdAt: string;
+  // scheduledTo: string;
   status: StatusTarefa;
 }
 
@@ -17,4 +17,5 @@ export interface DiaAgenda {
 export interface AgendaProps {
   mes: number;
   dias: DiaAgenda[];
+  diasAgenda: DiaAgenda[];
 }

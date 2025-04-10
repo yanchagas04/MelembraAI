@@ -3,7 +3,7 @@ import BarraLateral from "@/components/barraLateral/BarraLateral";
 import SeletorDiaMes from "@/components/seletorDiaMes/SeletorDiaMes";
 import AdicionarTarefa from "@/components/Tarefas/AdicionarTarefa";
 import Tarefas from "@/components/Tarefas/Tarefas";
-import { Dispatch, createContext, Context, useState } from "react";
+import {useState } from "react";
 import { Tarefa, TarefasContext, DataContext } from "./tipos";
 
 const tarefasConst : Tarefa[] = [

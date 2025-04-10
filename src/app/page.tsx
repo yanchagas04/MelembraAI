@@ -56,27 +56,29 @@ export default function Home() {
   const [ano, setAno] = useState(new Date().getFullYear());
   const [tarefas, setTarefas] = useState(tarefasConst);
   return (
-    <TarefasContext.Provider value={{
-        tarefas: tarefas,
-        setTarefas: setTarefas
-    }}>
-      <DataContext.Provider value={{
-        dia: dia,
-        mes: mes,
-        ano: ano,
-        setDia: setDia,
-        setMes: setMes,
-        setAno: setAno
-    }}>
-        <div className="flex flex-col-reverse md:flex-row w-screen h-screen bg-gradient-to-br from-blue-950 via-5% via-gray-800  to-black"> 
-          <BarraLateral foto_perfil={null} nome="João Barcelos De Lima Alboquere" />
-          <div className="flex flex-col items-center justify-start w-full h-full p-6 sm:p-8">
-            <SeletorDiaMes />
-            <Tarefas />
+    <>
+      <TarefasContext.Provider value={{
+          tarefas: tarefas,
+          setTarefas: setTarefas
+      }}>
+        <DataContext.Provider value={{
+          dia: dia,
+          mes: mes,
+          ano: ano,
+          setDia: setDia,
+          setMes: setMes,
+          setAno: setAno
+      }}>
+          <div className="flex flex-col-reverse md:flex-row w-screen h-screen bg-gradient-to-br from-blue-950 via-5% via-gray-800  to-black"> 
+            <BarraLateral foto_perfil={null} nome="João Barcelos De Lima Alboquere" />
+            <div className="flex flex-col items-center justify-start w-full h-full p-6 sm:p-8">
+              <SeletorDiaMes />
+              <Tarefas />
+            </div>
+            <AdicionarTarefa />
           </div>
-          <AdicionarTarefa />
-        </div>
-      </DataContext.Provider>
-    </TarefasContext.Provider>
+        </DataContext.Provider>
+      </TarefasContext.Provider>
+    </>
   );
 }

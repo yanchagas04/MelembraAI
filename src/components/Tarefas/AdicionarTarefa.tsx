@@ -3,6 +3,7 @@
 import { useContext, useState } from "react";
 import icone_lampada from "../../../public/Tarefas/suggestion.svg";
 import { Tarefa, TarefasContext } from "@/app/page";
+import { gerarAtividade } from "@/api/apiController";
 
 export default function AdicionarTarefa() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,9 +17,8 @@ export default function AdicionarTarefa() {
   const obterSugestao = async () => {
     setCarregando(true);
     try {
-      const response = await fetch("https://apis.scrimba.com/bored/api/activity");
-      const data = await response.json();
-      setTitulo(data.activity);
+      const data = await gerarAtividade();
+      setTitulo(data);
     } catch (error) {
       setTarefa("Não foi possível obter uma sugestão");
     } finally {

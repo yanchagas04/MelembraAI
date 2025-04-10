@@ -3,7 +3,7 @@
 import { useContext, useEffect, useState } from "react";
 import SetaDireita from "../../../public/SeletorDiaMes/setaDireita.svg";
 import SetaEsquerda from "../../../public/SeletorDiaMes/setaEsquerda.svg";
-import { DataContext } from "./SeletorDiaMes";
+import { DataContext } from "@/app/page";
 
 export default function SeletorMes(props: {meses: string[]}) {
     const data = useContext(DataContext);

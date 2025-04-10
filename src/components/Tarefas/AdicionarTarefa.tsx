@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import icone_lampada from "../../../public/Tarefas/suggestion.svg";
+import { Tarefa, TarefasContext } from "@/app/page";
 
 export default function AdicionarTarefa() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,7 @@ export default function AdicionarTarefa() {
   const [data, setData] = useState("");
   const [horaFim, setHoraFim] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const tarefasC = useContext(TarefasContext);
 
   const obterSugestao = async () => {
     setCarregando(true);
@@ -18,7 +20,6 @@ export default function AdicionarTarefa() {
       const data = await response.json();
       setTitulo(data.activity);
     } catch (error) {
-      console.error("Erro ao obter sugestão:", error);
       setTarefa("Não foi possível obter uma sugestão");
     } finally {
       setCarregando(false);
@@ -28,13 +29,15 @@ export default function AdicionarTarefa() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Lógica para salvar a tarefa com todos os campos
-    const novaTarefa = {
-      titulo,
+    const novaTarefa : Tarefa = {
+      id: (tarefasC.tarefas.length + 1).toString(),
+      titulo: titulo,
       descricao: tarefa,
-      data,
-      horaFim
+      data: `${data.split("-")[0]}-${parseInt(data.split("-")[1])}-${parseInt(data.split("-")[2])}`,
+      horaFim: horaFim.split(":")[0] + ":" + horaFim.split(":")[1],
+      concluida: false
     };
-    console.log("Tarefa adicionada:", novaTarefa);
+    tarefasC.setTarefas(prevTarefas => [...prevTarefas, novaTarefa]);
     // Limpa os campos
     setTitulo("");
     setTarefa("");
@@ -57,7 +60,7 @@ export default function AdicionarTarefa() {
       {/* Botão Flutuante */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-full shadow-lg flex items-center transition-colors"
+        className="fixed bottom-28 sm:bottom-20 right-4 md:bottom-6 md:right-6 bg-blue-500 hover:bg-blue-600 hover:scale-105 transition-all ease-in-out duration-150 text-white font-medium py-3 px-4 rounded-full shadow-lg flex items-center"
       >
         <span className="text-xl mr-1">+</span> Adicionar Tarefa
       </button>
@@ -172,7 +175,7 @@ export default function AdicionarTarefa() {
                   <button
                     type="submit"
                     className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors"
-                  >
+                    onClick={() => {handleSubmit}}>
                     Adicionar
                   </button>
                 </div>

@@ -14,7 +14,7 @@ const usuario: Usuario = {
     foto_perfil: foto_perfil.src ,
     senha: "senha123",
 };
-export default function MinhaConta(props: Usuario) {
+export default function MinhaConta() {
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="minha-conta text-center">

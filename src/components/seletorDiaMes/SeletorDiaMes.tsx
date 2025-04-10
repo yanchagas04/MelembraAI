@@ -1,5 +1,5 @@
 "use client"
-import { Context, createContext, Dispatch, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SeletorDia from "./SeletorDia";
 import SeletorMes from "./SeletorMes";
 import { pegarDias, iniciais_meses } from "./Utils/utils";

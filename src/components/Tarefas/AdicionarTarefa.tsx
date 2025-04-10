@@ -20,7 +20,7 @@ export default function AdicionarTarefa() {
       const data = await gerarAtividade();
       setTitulo(data);
     } catch (error) {
-      setTarefa("Não foi possível obter uma sugestão");
+      setTarefa("Não foi possível obter uma sugestão" + error);
     } finally {
       setCarregando(false);
     }
@@ -46,7 +46,7 @@ export default function AdicionarTarefa() {
     setIsOpen(false);
   };
 
-  const handleClose = (e: React.FormEvent) => {
+  const handleClose = () => {
     // Limpa os campos
     setTitulo("");
     setTarefa("");
@@ -167,7 +167,7 @@ export default function AdicionarTarefa() {
                 <div className="flex justify-end gap-2">
                   <button
                     type="button"
-                    onClick={handleClose}
+                    onClick={() => handleClose()}
                     className="px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded transition-colors"
                   >
                     Cancelar

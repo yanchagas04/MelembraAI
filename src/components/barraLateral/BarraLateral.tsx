@@ -1,5 +1,4 @@
 "use client"
-// Removed the inline module declaration. It will be moved to a separate file.
 import { useState } from "react";
 import icone_pessoa from "../../../public/BarraLateral/pessoa.svg";
 import icone_config from "../../../public/BarraLateral/config.svg";

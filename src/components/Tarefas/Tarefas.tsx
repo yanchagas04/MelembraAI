@@ -1,5 +1,5 @@
 "use client"
-import { use, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TarefaCard from "./TarefaCard";
 import { DataContext, TarefasContext } from "@/app/page";
 

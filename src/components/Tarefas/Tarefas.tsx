@@ -1,7 +1,7 @@
 "use client"
 import { useContext, useEffect, useState } from "react";
 import TarefaCard from "./TarefaCard";
-import { DataContext, TarefasContext } from "@/app/page";
+import { DataContext, TarefasContext } from "@/app/tipos";
 
 export default function Tarefas() {
     const data = useContext(DataContext);

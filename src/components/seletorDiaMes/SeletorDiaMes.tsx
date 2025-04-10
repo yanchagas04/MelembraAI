@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import SeletorDia from "./SeletorDia";
 import SeletorMes from "./SeletorMes";
 import { pegarDias, iniciais_meses } from "./Utils/utils";
-import { DataContext } from "@/app/page";
+import { DataContext } from "@/app/tipos";
 
 
 

@@ -2,7 +2,7 @@
 
 import { useContext, useState } from "react";
 import icone_lampada from "../../../public/Tarefas/suggestion.svg";
-import { Tarefa, TarefasContext } from "@/app/page";
+import { Tarefa, TarefasContext } from "@/app/tipos";
 import { gerarAtividade } from "@/api/apiController";
 
 export default function AdicionarTarefa() {

@@ -1,5 +1,4 @@
 "use client"
-import { useState } from "react";
 
 export default function Dia(props: {num: number, isSelected: boolean, onSelect: () => void}) {
     return (

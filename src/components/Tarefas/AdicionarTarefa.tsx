@@ -57,7 +57,7 @@ export default function AdicionarTarefa() {
       {/* Botão Flutuante */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-full shadow-lg flex items-center transition-colors"
+        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-full shadow-lg flex items-center transition-colors"
       >
         <span className="text-xl mr-1">+</span> Adicionar Tarefa
       </button>

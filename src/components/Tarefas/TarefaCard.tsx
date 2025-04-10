@@ -24,7 +24,7 @@ export default function TarefaCard(props: Tarefa){
                 }}><img src={!deleteH ? deleteIcon.src : deleteIconWhite.src} alt="delete" className="w-8" /></button>
             </div>
             <div className="flex flex-col w-full">
-                <h1 className={`${props.concluida ? "line-through" : ""} font-bold text-2xl`}>{props.titulo}</h1>
+                <h1 className={`${checked ? "line-through" : ""} font-bold text-2xl`}>{props.titulo}</h1>
                 <p className="pl-4">{props.descricao}</p>
                 <span className="flex flex-row justify-end items-center gap-2">
                     <p className="font-bold">{props.horaFim}</p>

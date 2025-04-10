@@ -38,6 +38,11 @@ export default function AdicionarTarefa() {
       concluida: false
     };
     tarefasC.setTarefas(prevTarefas => [...prevTarefas, novaTarefa]);
+    try {
+      localStorage.setItem("tarefas", JSON.stringify(tarefasC.tarefas));
+  } catch (error) {
+      console.log(error)
+  }
     // Limpa os campos
     setTitulo("");
     setTarefa("");

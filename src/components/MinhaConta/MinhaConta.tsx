@@ -1,5 +1,4 @@
 "use client";
-import foto_perfil from "../../../public/MinhaConta/WIN_20200420_15_20_41_Pro.jpg";
 import edit_pencil from "../../../public/MinhaConta/edit.svg"
 interface Usuario {
     nome: string,
@@ -9,16 +8,16 @@ interface Usuario {
     }
 
 const usuario: Usuario = {
-    nome: "João Silva",
-    email: "affaef@example.com",
-    foto_perfil: foto_perfil.src ,
+    nome: "Seu nome aqui",
+    email: "seuemail@example.com",
+    foto_perfil: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
     senha: "senha123",
 };
 export default function MinhaConta() {
     return (
         <div className="min-h-screen flex items-center justify-center">
-            <div className="minha-conta text-center">
-                <h1>Minha Conta</h1>
+            <div className="minha-conta flex flex-col w-full text-center gap-4">
+                <h1 className="text-2xl">Minha Conta</h1>
                 <img
                     src={usuario.foto_perfil}
                     alt="Foto de perfil"
@@ -39,7 +38,7 @@ export default function MinhaConta() {
                         />
                         <button
                             type="button"
-                            className="material-icons text-black cursor-pointer"
+                            className="material-icons text-black cursor-pointer w-6"
                             onClick={(e) => {
                                 const input = (e.currentTarget.previousSibling as HTMLInputElement);
                                 input.readOnly = false;
@@ -64,7 +63,7 @@ export default function MinhaConta() {
                         />
                         <button
                             type="button"
-                            className="material-icons text-black cursor-pointer"
+                            className="material-icons text-black cursor-pointer w-6"
                             onClick={(e) => {
                                 const input = (e.currentTarget.previousSibling as HTMLInputElement);
                                 input.readOnly = false;
@@ -89,7 +88,7 @@ export default function MinhaConta() {
                         />
                         <button
                             type="button"
-                            className="material-icons text-black cursor-pointer"
+                            className="material-icons text-black cursor-pointer w-6"
                             onClick={(e) => {
                                 const input = (e.currentTarget.previousSibling as HTMLInputElement);
                                 input.readOnly = false;

@@ -12,7 +12,7 @@ export default function Tarefas() {
         tarefasC.setTarefas(tarefasC.tarefas);
     }, [tarefasC.tarefas]);
     return (
-        <div id="tarefas" className="flex flex-col gap-2 w-full">
+        <div id="tarefas" className="flex flex-col items-center gap-2 w-full">
             {tarefas.map((tarefa) => tarefa.data.split("-")[1] === data.dia.toString() && tarefa.data.split("-")[2] === (data.mes + 1).toString()
             && <TarefaCard key={tarefa.id} {...tarefa} />)}
         </div>

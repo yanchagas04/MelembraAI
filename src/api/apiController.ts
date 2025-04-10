@@ -1,48 +1,50 @@
+"use client"
 require('dotenv').config()
-export const sgMail = require('@sendgrid/mail')
 export const SENDER = process.env.SENDER
-const KEY = process.env.API_KEY
-sgMail.setApiKey(KEY)
+const KEY = process.env.API_KEY as string
+const SECRET_KEY = process.env.API_SECRET_KEY as string
+// const mailjet = require('node-mailjet').connect(
+//     KEY,
+//     SECRET_KEY
+//   )
+  
+import mailjet from 'node-mailjet'
+mailjet.apiConnect(KEY, SECRET_KEY)
 
-export type mensagemEmail = {
-    subject: string,
-    text: string,
-    html: string
-}
-
-export type resposta = {
-    statusCode: number,
-    headers: string
-}
-
-export default function enviarEmail(menssagem: mensagemEmail, destinatario: string) {
-
-    let res : resposta = {
-        statusCode: 500, // Status code padrão de erro
-        headers: '' 
+export default async function enviarEmail(destinario: string) { 
+    let response = {
+      status: 200,
+      message: 'Email enviado com sucesso',
     }
-
-    const msg = {
-        to: destinatario,
-        from: SENDER,
-        subject: menssagem.subject,
-        text: menssagem.text,
-        html: menssagem.html,
-      }
-
-    sgMail
-    .send(msg)
-    .then((response : any) => {
-        res.statusCode = response[0].statusCode
-        res.headers = response[0].headers
+    const request = mailjet.HttpMethods.Post) ('send', { version: 'v3.1' }).request({
+      Messages: [
+        {
+          From: {
+            Email: SENDER,
+            Name: 'MelembraAI',
+          },
+          To: [
+            {
+              Email: destinario,
+              Name: 'Usuário',
+            },
+          ],
+          Subject: 'Email da plataforma de tarefas!',
+          TextPart: 'Olá!',
+          HTMLPart:
+            '<h3>Dear passenger 1, welcome to <a href="https://www.mailjet.com/">Mailjet</a>!</h3><br />May the delivery force be with you!',
+        },
+      ],
     })
-    .catch((error : any) => {
-        res.statusCode = 500
-        res.headers = error
-    })
-
-    return res
+    request
+      .then((result: { body: any }) => {
+        console.log(result.body)
+        return response
+      })
+      .catch((err: { statusCode: any }) => {
+        console.log(err.statusCode)
+        response.status = 500
+        response.message = 'Erro ao enviar o email'
+        return response
+      })
 }
-
-
-

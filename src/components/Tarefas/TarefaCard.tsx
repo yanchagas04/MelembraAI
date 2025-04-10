@@ -1,4 +1,4 @@
-import { Tarefa, TarefasContext } from "@/app/page"
+import { Tarefa, TarefasContext } from "@/app/tipos"
 import uncheckedIcon from "../../../public/Tarefas/unchecked.svg";
 import checkedIcon from "../../../public/Tarefas/check.svg";
 import deleteIcon from "../../../public/Tarefas/delete.svg";

@@ -4,7 +4,7 @@ import SetaEsquerda from "../../../public/SeletorDiaMes/setaEsquerda.svg";
 import SetaDireita from "../../../public/SeletorDiaMes/setaDireita.svg";
 import Dia from "./Dia";
 import React, { useContext, useEffect, useState } from 'react'
-import { DataContext } from "@/app/page";
+import { DataContext } from "@/app/tipos";
 import { deslocarDias } from "./Utils/utils";
 
 export default function SeletorDia(props: {dias: number[]}) {

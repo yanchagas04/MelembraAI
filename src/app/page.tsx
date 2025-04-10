@@ -22,6 +22,22 @@ const tarefasConst : Tarefa[] = [
     data: "2025-10-4",
     horaFim: "14:00",
     concluida: false
+  },
+  {
+    id: "3",
+    titulo: "Tarefa 3",
+    descricao: "Descrição da tarefa 3",
+    data: "2025-10-4",
+    horaFim: "16:00",
+    concluida: false
+  },
+  {
+    id: "4",
+    titulo: "Tarefa 4",
+    descricao: "Descrição da tarefa 4",
+    data: "2025-10-4",
+    horaFim: "18:00",
+    concluida: false
   }
 ]
 

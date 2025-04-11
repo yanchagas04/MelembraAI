@@ -5,47 +5,13 @@ import AdicionarTarefa from "@/components/Tarefas/AdicionarTarefa";
 import Tarefas from "@/components/Tarefas/Tarefas";
 import {useState } from "react";
 import { Tarefa, TarefasContext, DataContext } from "./tipos";
-
-const tarefasConst : Tarefa[] = [
-  {
-    id: "1",
-    titulo: "Tarefa 1",
-    descricao: "Descrição da tarefa 1",
-    data: `${new Date().getFullYear()}-${new Date().getDate()}-${new Date().getMonth() + 1}`,
-    horaFim: "12:00",
-    concluida: true
-  },
-  {
-    id: "2",
-    titulo: "Tarefa 2",
-    descricao: "Descrição da tarefa 2",
-    data: `${new Date().getFullYear()}-${new Date().getDate()}-${new Date().getMonth() + 1}`,
-    horaFim: "14:00",
-    concluida: false
-  },
-  {
-    id: "3",
-    titulo: "Tarefa 3",
-    descricao: "Descrição da tarefa 3",
-    data: `${new Date().getFullYear()}-${new Date().getDate()}-${new Date().getMonth() + 1}`,
-    horaFim: "16:00",
-    concluida: false
-  },
-  {
-    id: "4",
-    titulo: "Tarefa 4",
-    descricao: "Descrição da tarefa 4",
-    data: `${new Date().getFullYear()}-${new Date().getDate()}-${new Date().getMonth() + 1}`,
-    horaFim: "18:00",
-    concluida: false
-  }
-]
+import { pegarTarefas } from "@/controllers/database/databaseController";
 
 export default function Home() {
   const [dia, setDia] = useState(new Date().getDate());
   const [mes, setMes] = useState(new Date().getMonth());
   const [ano, setAno] = useState(new Date().getFullYear());
-  const [tarefas, setTarefas] = useState(tarefasConst);
+  const [tarefas, setTarefas] = useState(pegarTarefas());
   return (
     <>
       <TarefasContext.Provider value={{

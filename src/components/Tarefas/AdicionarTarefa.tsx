@@ -3,7 +3,7 @@
 import { useContext, useState } from "react";
 import icone_lampada from "../../../public/Tarefas/suggestion.svg";
 import { Tarefa, TarefasContext } from "@/app/tipos";
-import { gerarAtividade } from "@/api/apiController";
+import { gerarAtividade } from "@/controllers/api/apiController";
 
 export default function AdicionarTarefa() {
   const [isOpen, setIsOpen] = useState(false);

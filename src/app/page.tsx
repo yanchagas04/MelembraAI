@@ -4,14 +4,13 @@ import SeletorDiaMes from "@/components/seletorDiaMes/SeletorDiaMes";
 import AdicionarTarefa from "@/components/Tarefas/AdicionarTarefa";
 import Tarefas from "@/components/Tarefas/Tarefas";
 import {useState } from "react";
-import { Tarefa, TarefasContext, DataContext } from "./tipos";
-import { pegarTarefas } from "@/controllers/database/databaseController";
+import {TarefasContext, DataContext, Tarefa } from "./tipos";
 
 export default function Home() {
   const [dia, setDia] = useState(new Date().getDate());
   const [mes, setMes] = useState(new Date().getMonth());
   const [ano, setAno] = useState(new Date().getFullYear());
-  const [tarefas, setTarefas] = useState(pegarTarefas());
+  const [tarefas, setTarefas] = useState([] as Tarefa[]);
   return (
     <>
       <TarefasContext.Provider value={{

@@ -11,7 +11,7 @@ const tarefasConst : Tarefa[] = [
     id: "1",
     titulo: "Tarefa 1",
     descricao: "Descrição da tarefa 1",
-    data: "2025-10-4",
+    data: `${new Date().getFullYear()}-${new Date().getDate()}-${new Date().getMonth() + 1}`,
     horaFim: "12:00",
     concluida: true
   },
@@ -19,7 +19,7 @@ const tarefasConst : Tarefa[] = [
     id: "2",
     titulo: "Tarefa 2",
     descricao: "Descrição da tarefa 2",
-    data: "2025-10-4",
+    data: `${new Date().getFullYear()}-${new Date().getDate()}-${new Date().getMonth() + 1}`,
     horaFim: "14:00",
     concluida: false
   },
@@ -27,7 +27,7 @@ const tarefasConst : Tarefa[] = [
     id: "3",
     titulo: "Tarefa 3",
     descricao: "Descrição da tarefa 3",
-    data: "2025-10-4",
+    data: `${new Date().getFullYear()}-${new Date().getDate()}-${new Date().getMonth() + 1}`,
     horaFim: "16:00",
     concluida: false
   },
@@ -35,7 +35,7 @@ const tarefasConst : Tarefa[] = [
     id: "4",
     titulo: "Tarefa 4",
     descricao: "Descrição da tarefa 4",
-    data: "2025-10-4",
+    data: `${new Date().getFullYear()}-${new Date().getDate()}-${new Date().getMonth() + 1}`,
     horaFim: "18:00",
     concluida: false
   }

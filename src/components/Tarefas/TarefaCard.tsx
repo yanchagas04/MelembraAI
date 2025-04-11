@@ -29,7 +29,7 @@ export default function TarefaCard(props: Tarefa){
                 <span className="flex flex-row justify-end items-center gap-2">
                     <p className="font-bold">{props.horaFim}</p>
                     -
-                    <p>{formatada.toISOString().split("T")[0].split("-").reverse().join("/")}</p>
+                    <p className="italic">{formatada.toISOString().split("T")[0].split("-").reverse().join("/")}</p>
                 </span>
             </div>
             <div className={`${hovered ? "w-8" : "w-0"} flex flex-col gap-2 items-center justify-center transition-all ease-in-out duration-300 h-full`}>

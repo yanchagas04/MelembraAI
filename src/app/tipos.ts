@@ -10,7 +10,7 @@ export type DataContextType = {
 };
 
 export type Tarefa = {
-    id: string,
+    id: string | undefined,
     titulo: string,
     descricao: string,
     data: string,

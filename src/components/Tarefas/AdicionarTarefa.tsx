@@ -1,5 +1,6 @@
 "use client";
 
+import { createTarefa } from "@/controllers/database/prismaController";
 import { useContext, useState } from "react";
 import icone_lampada from "../../../public/Tarefas/suggestion.svg";
 import { Tarefa, TarefasContext } from "@/app/tipos";
@@ -12,7 +13,6 @@ export default function AdicionarTarefa() {
   const [data, setData] = useState("");
   const [horaFim, setHoraFim] = useState("");
   const [carregando, setCarregando] = useState(false);
-  const tarefasC = useContext(TarefasContext);
 
   const obterSugestao = async () => {
     setCarregando(true);
@@ -26,23 +26,18 @@ export default function AdicionarTarefa() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Lógica para salvar a tarefa com todos os campos
     const novaTarefa : Tarefa = {
-      id: (tarefasC.tarefas.length + 1).toString(),
+      id: null,
       titulo: titulo,
       descricao: tarefa,
       data: `${data.split("-")[0]}-${parseInt(data.split("-")[1])}-${parseInt(data.split("-")[2])}`,
       horaFim: horaFim.split(":")[0] + ":" + horaFim.split(":")[1],
       concluida: false
     };
-    tarefasC.setTarefas(prevTarefas => [...prevTarefas, novaTarefa]);
-    try {
-      localStorage.setItem("tarefas", JSON.stringify(tarefasC.tarefas));
-  } catch (error) {
-      console.log(error)
-  }
+    await createTarefa(novaTarefa);
     // Limpa os campos
     setTitulo("");
     setTarefa("");

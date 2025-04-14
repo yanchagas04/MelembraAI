@@ -1,7 +1,7 @@
 "use client";
 
 import { createTarefa } from "@/controllers/database/prismaController";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import icone_lampada from "../../../public/Tarefas/suggestion.svg";
 import { Tarefa, TarefasContext } from "@/app/tipos";
 import { gerarAtividade } from "@/controllers/api/apiController";
@@ -29,15 +29,21 @@ export default function AdicionarTarefa() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Lógica para salvar a tarefa com todos os campos
-    const novaTarefa : Tarefa = {
-      id: null,
+    const novaTarefa : Tarefa = { 
+      id: undefined,
       titulo: titulo,
       descricao: tarefa,
       data: `${data.split("-")[0]}-${parseInt(data.split("-")[1])}-${parseInt(data.split("-")[2])}`,
       horaFim: horaFim.split(":")[0] + ":" + horaFim.split(":")[1],
       concluida: false
     };
-    await createTarefa(novaTarefa);
+    const response = await fetch("/api/tarefas/adicionar", {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify(novaTarefa),
+  });
     // Limpa os campos
     setTitulo("");
     setTarefa("");

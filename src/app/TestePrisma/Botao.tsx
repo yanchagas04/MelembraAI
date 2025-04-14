@@ -12,7 +12,7 @@ const tarefaTeste : Tarefa = {
 }
 
 async function createRequest(data: Tarefa) {
-    const response = await fetch("/api/tarefas", {
+    const response = await fetch("/api/tarefas/adicionar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -1,6 +1,7 @@
-import { Botao } from "@/app/TestePrisma/Botao";
+
 import {fetchTarefas } from "@/controllers/database/prismaController";
 import TarefaCard from "../Tarefas/TarefaCard";
+import AdicionarTarefa from "../Tarefas/AdicionarTarefa";
 
 export default async function TestePrisma() {
     const tarefas = await fetchTarefas();
@@ -11,7 +12,7 @@ export default async function TestePrisma() {
                 {tarefas.length > 0 && tarefas.map((tarefa) => <TarefaCard key={tarefa.id} {...tarefa} />)}
                 {tarefas.length === 0 && <p className="text-center text-2xl font-bold text-red-500">Não há tarefas</p>}
             </div>
-            <Botao />
+            <AdicionarTarefa />
         </div>
     );
 }

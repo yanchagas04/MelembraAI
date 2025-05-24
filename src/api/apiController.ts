@@ -1,5 +1,5 @@
 const ACTIVITY_API_URL = "https://apis.scrimba.com/bored/api/activity";
-const API_URL = 'http://localhost:3001/api/auth';
+const API_URL = '';
 export async function gerarAtividade() {
     const response = await fetch(ACTIVITY_API_URL);
     const data = await response.json();

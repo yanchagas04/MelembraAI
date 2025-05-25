@@ -1,52 +1,26 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataContext, Tarefa, TarefasContext } from "../tipos";
 import BarraLateral from "@/components/barraLateral/BarraLateral";
 import SeletorDiaMes from "@/components/seletorDiaMes/SeletorDiaMes";
 import AdicionarTarefa from "@/components/Tarefas/AdicionarTarefa";
 import Tarefas from "@/components/Tarefas/Tarefas";
+import pegarTarefas from "./tarefas";
 
-const tarefasConst : Tarefa[] = [
-  {
-    id: "1",
-    titulo: "Tarefa 1",
-    descricao: "Descrição da tarefa 1",
-    data: "2025-10-4",
-    horaFim: "12:00",
-    concluida: true
-  },
-  {
-    id: "2",
-    titulo: "Tarefa 2",
-    descricao: "Descrição da tarefa 2",
-    data: "2025-10-4",
-    horaFim: "14:00",
-    concluida: false
-  },
-  {
-    id: "3",
-    titulo: "Tarefa 3",
-    descricao: "Descrição da tarefa 3",
-    data: "2025-10-4",
-    horaFim: "16:00",
-    concluida: false
-  },
-  {
-    id: "4",
-    titulo: "Tarefa 4",
-    descricao: "Descrição da tarefa 4",
-    data: "2025-10-4",
-    horaFim: "18:00",
-    concluida: false
-  }
-]
-
+const nome = localStorage.getItem("nome") || "Seu nome aqui"
 
 export default function Home() {
   const [dia, setDia] = useState(new Date().getDate());
   const [mes, setMes] = useState(new Date().getMonth());
   const [ano, setAno] = useState(new Date().getFullYear());
-  const [tarefas, setTarefas] = useState(tarefasConst);
+  const [tarefas, setTarefas] = useState<Tarefa[]>([]);
+  useEffect(() => {
+    const getTarefas = async () => {
+      const res = (await pegarTarefas()) as unknown as Tarefa[];
+      setTarefas(res);
+    }
+    getTarefas();
+  }, [tarefas]);
   return (
     <>
       <TarefasContext.Provider value={{
@@ -62,7 +36,7 @@ export default function Home() {
           setAno: setAno
       }}>
           <div className="flex flex-col-reverse md:flex-row w-screen h-screen bg-gradient-to-br from-blue-950 via-5% via-gray-800  to-black"> 
-            <BarraLateral foto_perfil={null} nome="Seu nome aqui" />
+            <BarraLateral foto_perfil={null} nome={nome} />
             <div className="flex flex-col items-center justify-start w-full h-full p-6 sm:p-8">
               <SeletorDiaMes />
               <Tarefas />

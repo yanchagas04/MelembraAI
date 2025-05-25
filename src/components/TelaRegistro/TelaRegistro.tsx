@@ -29,6 +29,7 @@ export default function TelaRegistro() {
         console.log(res);
         if (res.user !== undefined){  
             setSuccessMessage("Cadastro realizado com sucesso!");
+            setIsLoading(false);
         } else {
              setError(res.message || "Falha ao fazer login. Tente novamente.");
         }

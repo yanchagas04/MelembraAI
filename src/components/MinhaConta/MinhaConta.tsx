@@ -1,12 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import edit_pencil from "../../../public/MinhaConta/edit.svg"
-interface Usuario {
-    nome: string,
-    email: string,
-    foto_perfil: string,
-    senha: string;
-    }
 
 export default function MinhaConta() {
     const [nome, setNome] = useState("");

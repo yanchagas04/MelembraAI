@@ -26,6 +26,7 @@ export default function Tarefas() {
             }
           })
           setTarefas(tasks);
+          tasks = [];
         }
         getTarefas();
       }, [tarefas]);

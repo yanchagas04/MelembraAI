@@ -1,10 +1,10 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import icone_lampada from "../../../public/Tarefas/suggestion.svg"
-import { Tarefa, TarefasContext } from "../../app/tipos";
+import { Tarefa } from "../../app/tipos";
 import { gerarAtividade } from "../../api/apiController";
-import criarTarefa from "./addTarefa";
+import criarTarefa from "./tarefaFunction";
 
 export default function AdicionarTarefa() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +12,6 @@ export default function AdicionarTarefa() {
   const [tarefa, setTarefa] = useState("");
   const [data, setData] = useState("");
   const [carregando, setCarregando] = useState(false);
-  const tarefasC = useContext(TarefasContext);
 
   const obterSugestao = async () => {
     setCarregando(true);

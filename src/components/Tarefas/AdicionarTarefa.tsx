@@ -1,16 +1,16 @@
 "use client";
 
 import { useContext, useState } from "react";
-import icone_lampada from "../../../public/Tarefas/suggestion.svg";
-import { Tarefa, TarefasContext } from "@/app/tipos";
-import { gerarAtividade } from "@/api/apiController";
+import icone_lampada from "../../../public/Tarefas/suggestion.svg"
+import { Tarefa, TarefasContext } from "../../app/tipos";
+import { gerarAtividade } from "../../api/apiController";
+import criarTarefa from "./addTarefa";
 
 export default function AdicionarTarefa() {
   const [isOpen, setIsOpen] = useState(false);
   const [titulo, setTitulo] = useState("");
   const [tarefa, setTarefa] = useState("");
   const [data, setData] = useState("");
-  const [horaFim, setHoraFim] = useState("");
   const [carregando, setCarregando] = useState(false);
   const tarefasC = useContext(TarefasContext);
 
@@ -26,28 +26,27 @@ export default function AdicionarTarefa() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Lógica para salvar a tarefa com todos os campos
     const novaTarefa : Tarefa = {
-      id: (tarefasC.tarefas.length + 1).toString(),
+      id: "0",
       titulo: titulo,
       descricao: tarefa,
-      data: `${data.split("-")[0]}-${parseInt(data.split("-")[1])}-${parseInt(data.split("-")[2])}`,
-      horaFim: horaFim.split(":")[0] + ":" + horaFim.split(":")[1],
+      data: data,
       concluida: false
     };
-    tarefasC.setTarefas(prevTarefas => [...prevTarefas, novaTarefa]);
-    try {
-      localStorage.setItem("tarefas", JSON.stringify(tarefasC.tarefas));
-  } catch (error) {
-      console.log(error)
-  }
+
+    const response = await criarTarefa(novaTarefa);
+    console.log(response);
+    if (response.activity === undefined) {
+      alert("Erro ao criar tarefa!");
+    }
+
     // Limpa os campos
     setTitulo("");
     setTarefa("");
     setData("");
-    setHoraFim("");
     setIsOpen(false);
   };
 
@@ -56,7 +55,6 @@ export default function AdicionarTarefa() {
     setTitulo("");
     setTarefa("");
     setData("");
-    setHoraFim("");
     setIsOpen(false);
   };
 
@@ -136,21 +134,6 @@ export default function AdicionarTarefa() {
                     className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
                     required
                   />
-                </div>
-
-                {/* Campos de Horário */}
-                <div className="mb-4 flex flex-col justify-start">
-                    <label htmlFor="horaFim" className="block mb-2 font-medium text-gray-700">
-                      Hora Fim*
-                    </label>
-                    <input
-                      type="time"
-                      id="horaFim"
-                      value={horaFim}
-                      onChange={(e) => setHoraFim(e.target.value)}
-                      className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
-                      required
-                    />
                 </div>
 
                 {/* Campo Descrição */}

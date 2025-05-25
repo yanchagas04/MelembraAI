@@ -1,32 +1,21 @@
 "use client";
 import { useEffect, useState } from "react";
-import { DataContext, Tarefa, TarefasContext } from "../tipos";
+import { DataContext} from "../tipos";
 import BarraLateral from "@/components/barraLateral/BarraLateral";
 import SeletorDiaMes from "@/components/seletorDiaMes/SeletorDiaMes";
-import AdicionarTarefa from "@/components/Tarefas/AdicionarTarefa";
+import AdicionarTarefa from "../../components/Tarefas/AdicionarTarefa";
 import Tarefas from "@/components/Tarefas/Tarefas";
-import pegarTarefas from "./tarefas";
-
-const nome = localStorage.getItem("nome") || "Seu nome aqui"
 
 export default function Home() {
+  const [nome, setNome] = useState("");
   const [dia, setDia] = useState(new Date().getDate());
   const [mes, setMes] = useState(new Date().getMonth());
   const [ano, setAno] = useState(new Date().getFullYear());
-  const [tarefas, setTarefas] = useState<Tarefa[]>([]);
   useEffect(() => {
-    const getTarefas = async () => {
-      const res = (await pegarTarefas()) as unknown as Tarefa[];
-      setTarefas(res);
-    }
-    getTarefas();
-  }, [tarefas]);
+    localStorage.getItem("nome") || "Seu nome aqui"
+  })
   return (
     <>
-      <TarefasContext.Provider value={{
-          tarefas: tarefas,
-          setTarefas: setTarefas
-      }}>
         <DataContext.Provider value={{
           dia: dia,
           mes: mes,
@@ -44,7 +33,6 @@ export default function Home() {
             <AdicionarTarefa />
           </div>
         </DataContext.Provider>
-      </TarefasContext.Provider>
     </>
   );
 }

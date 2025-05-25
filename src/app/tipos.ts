@@ -14,7 +14,6 @@ export type Tarefa = {
     titulo: string,
     descricao: string,
     data: string,
-    horaFim: string,
     concluida: boolean
 }
 

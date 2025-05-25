@@ -4,8 +4,13 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-   window.location.href = "/TelaLogin";
-  }, []);
+   if(localStorage.getItem("token") === undefined){
+      window.location.href = "/TelaLogin";
+   } else{
+      window.location.href = "/AreaLogada";
+   }
+}, []);
   return <div>Home</div>;
+
 
 }

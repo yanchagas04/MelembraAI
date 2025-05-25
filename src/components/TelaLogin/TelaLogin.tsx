@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { login } from "../../api/apiController"; // Assuming login API integration is needed later
+import login from "../TelaLogin/Login"; // Assuming login API integration is needed later
 import Link from 'next/link'; // Import Link for navigation
 
 export default function TelaLogin() {
@@ -18,17 +18,21 @@ export default function TelaLogin() {
         // Simulating API call delay
         await new Promise(resolve => setTimeout(resolve, 1000)); 
 
-        if (email === "test@example.com" && password === "password123") { // Replace with actual API call
-            alert("Login realizado com sucesso! (Simulado)");
-            // Redirect user or update state upon successful login
+        const res = await login(email, password);
+        console.log(res);
+        if (res.token !== undefined) {
+            const token = res.token;
+            localStorage.setItem("token", token);
+            window.location.href = "/AreaLogada";
         } else {
-            setError("Email ou senha inválidos.");
+            setError(res.message || "Falha ao fazer login. Tente novamente.");
         }
+
         
         setIsLoading(false);
 
         /* // Example of actual API call integration (uncomment and adapt)
-        try {
+        try { 
             const result = await login(email, password);
             // Handle successful login (e.g., store token, redirect)
             console.log("Login successful:", result);
@@ -69,6 +73,7 @@ export default function TelaLogin() {
                         type="submit"
                         className={`bg-blue-600 text-white rounded-md px-4 py-2 font-medium hover:bg-blue-700 transition duration-200 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                         disabled={isLoading}
+                        onClick={handleSubmit}
                     >
                         {isLoading ? "Entrando..." : "Entrar"}
                     </button>

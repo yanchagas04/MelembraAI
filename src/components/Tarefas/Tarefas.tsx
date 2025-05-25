@@ -1,7 +1,7 @@
 "use client"
 import { useContext, useEffect, useState } from "react";
 import TarefaCard from "./TarefaCard";
-import { DataContext, Tarefa } from "@/app/tipos";
+import { Activity, DataContext, Tarefa } from "@/app/tipos";
 import pegarTarefas from "@/app/AreaLogada/tarefas";
 
 export default function Tarefas() {
@@ -11,8 +11,9 @@ export default function Tarefas() {
         const getTarefas = async () => {
           const res = (await pegarTarefas());
           let tasks = [] as Tarefa[];
-          res.forEach((tarefa: any) => {
-            const dataT = new Date(tarefa.date.split('T')[0].split('-'));
+          res.forEach((tarefa: Activity) => {
+            const separada = tarefa.date.split('T')[0].split('-');
+            const dataT = new Date(parseInt(separada[0]), parseInt(separada[1]) - 1, parseInt(separada[2]));
             const dataAtual = new Date(data.ano + '-' + (data.mes + 1) + '-' + data.dia);
             if (dataT.getFullYear() === dataAtual.getFullYear() && dataT.getMonth() === dataAtual.getMonth() && dataT.getDate() === dataAtual.getDate() && dataT.getDay() === dataAtual.getDay()) {
                 tasks.push({
@@ -30,7 +31,7 @@ export default function Tarefas() {
       }, [tarefas]);
     return (
         <div id="tarefas" className="flex flex-col items-center gap-2 w-full">
-            {tarefas.map((tarefa: any) => <TarefaCard key={tarefa.id} id={tarefa.id} titulo={tarefa.titulo} descricao={tarefa.descricao} data={tarefa.data} concluida={tarefa.concluida} />)}
+            {tarefas.map((tarefa: Tarefa) => <TarefaCard key={tarefa.id} id={tarefa.id} titulo={tarefa.titulo} descricao={tarefa.descricao} data={tarefa.data} concluida={tarefa.concluida} />)}
         </div>
     )
 }

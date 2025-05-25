@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { register } from "../../api/apiController"; // Import the register function
+import register from "../TelaRegistro/Registro"; // Import the register function
 import Link from 'next/link'; // Import Link for navigation
 
 export default function TelaRegistro() {
@@ -25,19 +25,16 @@ export default function TelaRegistro() {
             return;
         }
 
-        setIsLoading(true);
-
-        try {
-            const result = await register(name, email, password);
-            setSuccessMessage(result.message || "Registro realizado com sucesso!");
-            setName("");
-            setEmail("");
-            setPassword("");
-        } catch (err: any) {
-            setError(err.message || "Falha ao registrar. Tente novamente.");
-        } finally {
+        const res = await register(name, email, password);
+        console.log(res);
+        if (res.user !== undefined){  
+            setSuccessMessage("Cadastro realizado com sucesso!");
             setIsLoading(false);
+        } else {
+             setError(res.message || "Falha ao fazer login. Tente novamente.");
         }
+
+        setIsLoading(true);
     };
 
     return (

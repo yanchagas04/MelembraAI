@@ -7,11 +7,16 @@ interface Usuario {
     senha: string;
     }
 
+const nome = localStorage.getItem("nome") || "Seu nome aqui"
+const email = localStorage.getItem("email") || "seuemail@example.com"
+const senha = localStorage.getItem("senha") || ""
+const foto_perfil = localStorage.getItem("foto_perfil") || "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+
 const usuario: Usuario = {
-    nome: "Seu nome aqui",
-    email: "seuemail@example.com",
-    foto_perfil: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
-    senha: "senha123",
+    nome: nome,
+    email: email,
+    foto_perfil: foto_perfil,
+    senha: senha
 };
 export default function MinhaConta() {
     return (
@@ -99,6 +104,10 @@ export default function MinhaConta() {
                         </button>
                     </label>
                 </form>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+                        onClick={() => {alert("Esta funcionalidade estará disponível em breve.")}}>
+                        Salvar (em breve)
+                    </button>
             </div>
         </div>
     );

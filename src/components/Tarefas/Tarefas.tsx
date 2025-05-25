@@ -1,20 +1,36 @@
 "use client"
 import { useContext, useEffect, useState } from "react";
 import TarefaCard from "./TarefaCard";
-import { DataContext, TarefasContext } from "@/app/tipos";
+import { DataContext, Tarefa } from "@/app/tipos";
+import pegarTarefas from "@/app/AreaLogada/tarefas";
 
 export default function Tarefas() {
     const data = useContext(DataContext);
-    const tarefasC = useContext(TarefasContext);
-    const [tarefas, setTarefas] = useState(tarefasC.tarefas);
+    const [tarefas, setTarefas] = useState([] as Tarefa[]);
     useEffect(() => {
-        setTarefas(tarefasC.tarefas);
-        tarefasC.setTarefas(tarefasC.tarefas);
-    }, [tarefasC.tarefas]);
+        const getTarefas = async () => {
+          const res = (await pegarTarefas());
+          let tasks = [] as Tarefa[];
+          res.forEach((tarefa: any) => {
+            const dataT = new Date(tarefa.date.split('T')[0].split('-'));
+            const dataAtual = new Date(data.ano + '-' + (data.mes + 1) + '-' + data.dia);
+            if (dataT.getFullYear() === dataAtual.getFullYear() && dataT.getMonth() === dataAtual.getMonth() && dataT.getDate() === dataAtual.getDate() && dataT.getDay() === dataAtual.getDay()) {
+                tasks.push({
+                  id: tarefa.id,
+                  titulo: tarefa.title,
+                  descricao: tarefa.description,
+                  data: tarefa.date,
+                  concluida: tarefa.completed
+                } as Tarefa);
+            }
+          })
+          setTarefas(tasks);
+        }
+        getTarefas();
+      }, [tarefas]);
     return (
         <div id="tarefas" className="flex flex-col items-center gap-2 w-full">
-            {tarefas.map((tarefa) => tarefa.data.split("-")[1] === data.dia.toString() && tarefa.data.split("-")[2] === (data.mes + 1).toString()
-            && <TarefaCard key={tarefa.id} {...tarefa} />)}
+            {tarefas.map((tarefa: any) => <TarefaCard key={tarefa.id} id={tarefa.id} titulo={tarefa.titulo} descricao={tarefa.descricao} data={tarefa.data} concluida={tarefa.concluida} />)}
         </div>
     )
 }

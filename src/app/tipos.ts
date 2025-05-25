@@ -17,6 +17,14 @@ export type Tarefa = {
     concluida: boolean
 }
 
+export type Activity = {
+    id: string,
+    title: string,
+    description: string,
+    date: string,
+    completed: boolean
+}
+
 export type TarefasContextType = {
     tarefas: Tarefa[],
     setTarefas: Dispatch<React.SetStateAction<Tarefa[]>>

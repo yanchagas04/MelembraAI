@@ -12,7 +12,7 @@ export default function Home() {
   const [mes, setMes] = useState(new Date().getMonth());
   const [ano, setAno] = useState(new Date().getFullYear());
   useEffect(() => {
-    localStorage.getItem("nome") || "Seu nome aqui"
+    setNome(localStorage.getItem("nome") || "Seu nome aqui");
   })
   return (
     <>

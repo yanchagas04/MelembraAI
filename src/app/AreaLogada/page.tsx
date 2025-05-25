@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { DataContext, Tarefa, TarefasContext } from "../tipos";
 import BarraLateral from "@/components/barraLateral/BarraLateral";

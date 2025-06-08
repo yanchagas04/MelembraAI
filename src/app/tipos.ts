@@ -14,8 +14,15 @@ export type Tarefa = {
     titulo: string,
     descricao: string,
     data: string,
-    horaFim: string,
     concluida: boolean
+}
+
+export type Activity = {
+    id: string,
+    title: string,
+    description: string,
+    date: string,
+    completed: boolean
 }
 
 export type TarefasContextType = {

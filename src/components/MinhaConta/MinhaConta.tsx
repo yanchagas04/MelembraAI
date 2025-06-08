@@ -1,25 +1,24 @@
 "use client";
+import { useEffect, useState } from "react";
 import edit_pencil from "../../../public/MinhaConta/edit.svg"
-interface Usuario {
-    nome: string,
-    email: string,
-    foto_perfil: string,
-    senha: string;
-    }
 
-const usuario: Usuario = {
-    nome: "Seu nome aqui",
-    email: "seuemail@example.com",
-    foto_perfil: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
-    senha: "senha123",
-};
 export default function MinhaConta() {
+    const [nome, setNome] = useState("");
+    const [email, setEmail] = useState("");
+    const [foto_perfil, setFoto_perfil] = useState("");
+    const [senha, setSenha] = useState("");
+    useEffect(() => {
+        setNome(localStorage.getItem("nome") || "");
+        setEmail(localStorage.getItem("email") || "");
+        setFoto_perfil(localStorage.getItem("foto_perfil") || "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y");
+        setSenha(localStorage.getItem("senha") || "");
+    })
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="minha-conta flex flex-col w-full text-center gap-4">
                 <h1 className="text-2xl">Minha Conta</h1>
                 <img
-                    src={usuario.foto_perfil}
+                    src={foto_perfil}
                     alt="Foto de perfil"
                     className="w-50 h-50 rounded-full object-cover mx-auto"
                 />
@@ -28,7 +27,7 @@ export default function MinhaConta() {
                         Nome:
                         <input
                             type="text"
-                            defaultValue={usuario.nome}
+                            defaultValue={nome}
                             placeholder="Digite seu nome"
                             className="border rounded px-2 py-1"
                             readOnly
@@ -53,7 +52,7 @@ export default function MinhaConta() {
                         Email:
                         <input
                             type="email"
-                            defaultValue={usuario.email}
+                            defaultValue={email}
                             placeholder="Digite seu email"
                             className="border rounded px-2 py-1"
                             readOnly
@@ -78,7 +77,7 @@ export default function MinhaConta() {
                         Senha:
                         <input
                             type="password"
-                            defaultValue={usuario.senha}
+                            defaultValue={senha}
                             placeholder="Digite sua senha"
                             className="border rounded px-2 py-1"
                             readOnly
@@ -99,6 +98,10 @@ export default function MinhaConta() {
                         </button>
                     </label>
                 </form>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+                        onClick={() => {alert("Esta funcionalidade estará disponível em breve.")}}>
+                        Salvar (em breve)
+                    </button>
             </div>
         </div>
     );

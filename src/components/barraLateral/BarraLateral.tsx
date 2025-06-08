@@ -27,7 +27,11 @@ export default function BarraLateral(props: BarraLateralProps) {
         },
         {
             icone: icone_config.src,
-            texto: " Opções"
+            texto: " Logout",
+            onClick: () => {
+                localStorage.clear();
+                router.push("/");
+            }
         },
     ];
 

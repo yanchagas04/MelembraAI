@@ -1,5 +1,5 @@
 "use client"
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import TarefaCard from "./TarefaCard";
 import { Activity, DataContext, Tarefa } from "@/app/tipos";
 import pegarTarefas from "@/app/AreaLogada/tarefas";
@@ -13,7 +13,7 @@ export default function Tarefas() {
       let filter = document.getElementById('searchInput') as HTMLInputElement
       setFiltro(filter.value)
     }
-    useEffect(() => {
+    useMemo(() => {
         const getTarefas = async () => {
           const res = (await pegarTarefas());
           let tasks = [] as Tarefa[];
@@ -39,7 +39,7 @@ export default function Tarefas() {
           tasks = [];
         }
         getTarefas();
-      }, [tarefas]);
+      }, []);
     return (
           <div id="tarefas" className="flex flex-col items-center gap-4 w-full">
             <div className="relative w-full md:w-3/4 max-w-2xl">

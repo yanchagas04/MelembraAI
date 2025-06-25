@@ -30,6 +30,9 @@ export default function TelaRegistro() {
         if (res.user !== undefined){  
             setSuccessMessage("Cadastro realizado com sucesso!");
             setIsLoading(false);
+            setTimeout(() => {
+                window.location.href = "/TelaLogin";
+            }, 3000);
         } else {
              setError(res.message || "Falha ao fazer login. Tente novamente.");
         }

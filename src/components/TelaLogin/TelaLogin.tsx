@@ -26,7 +26,9 @@ export default function TelaLogin() {
             localStorage.setItem("email", email);
             localStorage.setItem("senha", password);
             localStorage.setItem("nome", res.user.name);
-            window.location.href = "/AreaLogada";
+            setTimeout(() => {
+                window.location.href = "/AreaLogada";
+            }, 3000);
             setIsLoading(false);
         } else {
             setError(res.message || "Falha ao fazer login. Tente novamente.");

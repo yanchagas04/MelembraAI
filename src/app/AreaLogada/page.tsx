@@ -1,6 +1,6 @@
 "use client";
-import { use, useEffect, useState } from "react";
-import { DataContext} from "../tipos";
+import { useEffect, useState } from "react";
+import { DataContext } from "../tipos";
 import BarraLateral from "@/components/barraLateral/BarraLateral";
 import SeletorDiaMes from "@/components/seletorDiaMes/SeletorDiaMes";
 import AdicionarTarefa from "../../components/Tarefas/AdicionarTarefa";
@@ -11,30 +11,36 @@ export default function Home() {
   const [mes, setMes] = useState(new Date().getMonth());
   const [ano, setAno] = useState(new Date().getFullYear());
   const [nome, setNome] = useState("Seu nome aqui");
-  useEffect(() => {
-    setNome(localStorage.getItem("nome") || "Seu nome aqui");
-  }, [])
-  return (
-    <>
-        <DataContext.Provider value={{
-          dia: dia,
-          mes: mes,
-          ano: ano,
-          setDia: setDia,
-          setMes: setMes,
-          setAno: setAno
-      }}>
+  const [isClient, setIsClient] = useState(false);
 
-          <div className="flex flex-col-reverse md:flex-row w-screen h-screen bg-gradient-to-br from-blue-950 via-5% via-gray-800  to-black"> 
-            <BarraLateral foto_perfil={null} nome={nome} />
-            <div className="flex flex-col items-center justify-start w-full h-full p-6 sm:p-8">
-              <SeletorDiaMes />
-             
-              <Tarefas />
-            </div>
-            <AdicionarTarefa />
-          </div>
-        </DataContext.Provider>
-    </>
+  useEffect(() => {
+    setIsClient(true);
+    setNome(localStorage.getItem("nome") || "Seu nome aqui");
+  }, []);
+
+  if (!isClient) {
+    return null; // Ou um loading state
+  }
+
+  return (
+    <DataContext.Provider
+      value={{
+        dia: dia,
+        mes: mes,
+        ano: ano,
+        setDia: setDia,
+        setMes: setMes,
+        setAno: setAno,
+      }}
+    >
+      <div className="flex flex-col-reverse md:flex-row w-screen h-screen bg-gradient-to-br from-blue-950 via-5% via-gray-800 to-black">
+        <BarraLateral foto_perfil={null} nome={nome} />
+        <div className="flex flex-col items-center justify-start w-full h-full p-6 sm:p-8">
+          <SeletorDiaMes />
+          <Tarefas />
+        </div>
+        <AdicionarTarefa />
+      </div>
+    </DataContext.Provider>
   );
 }

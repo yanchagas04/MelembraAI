@@ -18,11 +18,12 @@ export default function BarraLateral(props: BarraLateralProps) {
     const opcoes : OpcaoBarraProps[] = [
         {
             icone: icone_pessoa.src,
-            texto: " Minha Conta",
+            texto: "Minha Conta",
             onClick: () => router.push("/MinhaConta")
         },
         {
             icone: icone_calendario.src,
+<<<<<<< feat/Summary-Email
             texto: " Agenda",
             onClick: () => router.push("/AreaLogada")
         },
@@ -30,15 +31,20 @@ export default function BarraLateral(props: BarraLateralProps) {
             icone: icone_calendario.src,
             texto: " Enviar Resumo",
             onClick: () => router.push("/EnvioResumo")
+=======
+            texto: "Agenda",
+            onClick: () => router.push("/")
+>>>>>>> main
         },
         {
             icone: icone_config.src,
-            texto: " Logout",
+            texto: "Logout",
             onClick: () => {
                 localStorage.clear();
                 router.push("/");
             }
         },
+        
     ];
 
     return (

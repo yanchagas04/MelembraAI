@@ -8,11 +8,16 @@ export default function EnvioResumo() {
   const [emailUsuario, setEmailUsuario] = useState("");
   const [enviando, setEnviando] = useState(false);
   const [mensagem, setMensagem] = useState("");
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    // Buscar o email do usuário logado do localStorage
-    const email = localStorage.getItem("email") || "usuario@exemplo.com";
-    setEmailUsuario(email);
+    // Verifica se está no cliente antes de acessar localStorage
+    if (typeof window !== 'undefined') {
+      const email = window.localStorage.getItem("email") || "usuario@exemplo.com";
+      const token = window.localStorage.getItem("token");
+      setEmailUsuario(email);
+      setToken(token);
+    }
   }, []);
 
   const formatarDataHoje = () => {
@@ -21,78 +26,80 @@ export default function EnvioResumo() {
   };
 
   const formatarDataParaAPI = (data: Date) => {
-    return data.toISOString().split('T')[0];
+    // Ajusta para o fuso horário local antes de formatar
+    const offset = data.getTimezoneOffset();
+    const adjustedDate = new Date(data.getTime() - (offset * 60 * 1000));
+    return adjustedDate.toISOString().split('T')[0];
   };
 
-const handleEnviarResumo = async () => {
-  if (!emailUsuario) {
-    setMensagem("Email do usuário não encontrado. Faça login novamente.");
-    return;
-  }
-
-  if (tipoFiltro === "intervalo" && (!dataInicio || !dataFim)) {
-    setMensagem("Por favor, selecione as datas de início e fim.");
-    return;
-  }
-
-  if (tipoFiltro === "intervalo" && new Date(dataInicio) > new Date(dataFim)) {
-    setMensagem("A data de início deve ser anterior à data de fim.");
-    return;
-  }
-
-  setEnviando(true);
-  setMensagem("");
-
-  try {
-    let dataInicioFormatada, dataFimFormatada;
-
-    if (tipoFiltro === "hoje") {
-      const hoje = new Date();
-      dataInicioFormatada = formatarDataParaAPI(hoje);
-      dataFimFormatada = formatarDataParaAPI(hoje);
-    } else {
-      dataInicioFormatada = dataInicio;
-      dataFimFormatada = dataFim;
-    }
-
-    const token = localStorage.getItem("token");
-    if (!token) {
-      setMensagem("Sessão expirada. Faça login novamente.");
+  const handleEnviarResumo = async () => {
+    if (!emailUsuario) {
+      setMensagem("Email do usuário não encontrado. Faça login novamente.");
       return;
     }
 
-const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/summary/send`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        includeCompleted: true,
-        includePending: true,
-        dateRange: tipoFiltro === "intervalo" ? {
-          start: dataInicioFormatada,
-          end: dataFimFormatada
-        } : undefined
-      }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      setMensagem(data.message || "Resumo enviado com sucesso para seu email!");
-      setDataInicio("");
-      setDataFim("");
-    } else {
-      const errorData = await response.json();
-      setMensagem(errorData.message || "Erro ao enviar resumo. Tente novamente.");
+    if (tipoFiltro === "intervalo" && (!dataInicio || !dataFim)) {
+      setMensagem("Por favor, selecione as datas de início e fim.");
+      return;
     }
-  } catch (error) {
-  console.log(error);
-  setMensagem("Erro ao enviar resumo. Verifique sua conexão.");
-  } finally {
-    setEnviando(false);
-  }
-};
+
+    if (tipoFiltro === "intervalo" && new Date(dataInicio) > new Date(dataFim)) {
+      setMensagem("A data de início deve ser anterior à data de fim.");
+      return;
+    }
+
+    setEnviando(true);
+    setMensagem("");
+
+    try {
+      let dataInicioFormatada, dataFimFormatada;
+
+      if (tipoFiltro === "hoje") {
+        const hoje = new Date();
+        dataInicioFormatada = formatarDataParaAPI(hoje);
+        dataFimFormatada = formatarDataParaAPI(hoje);
+      } else {
+        dataInicioFormatada = dataInicio;
+        dataFimFormatada = dataFim;
+      }
+
+      if (!token) {
+        setMensagem("Sessão expirada. Faça login novamente.");
+        return;
+      }
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/summary/send`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          includeCompleted: true,
+          includePending: true,
+          dateRange: tipoFiltro === "intervalo" ? {
+            start: dataInicioFormatada,
+            end: dataFimFormatada
+          } : undefined
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setMensagem(data.message || "Resumo enviado com sucesso para seu email!");
+        setDataInicio("");
+        setDataFim("");
+      } else {
+        const errorData = await response.json();
+        setMensagem(errorData.message || "Erro ao enviar resumo. Tente novamente.");
+      }
+      } catch (error) {
+        console.log(error);
+        setMensagem("Erro ao enviar resumo. Verifique sua conexão.");
+      } finally {
+        setEnviando(false);
+      }
+  };
 
   return (
     <div className="w-full max-w-2xl mx-auto bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-lg">

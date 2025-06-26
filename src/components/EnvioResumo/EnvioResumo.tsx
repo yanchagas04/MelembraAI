@@ -6,21 +6,8 @@ export default function EnvioResumo() {
   const [tipoFiltro, setTipoFiltro] = useState<"hoje" | "intervalo">("hoje");
   const [dataInicio, setDataInicio] = useState("");
   const [dataFim, setDataFim] = useState("");
-  const [emailUsuario, setEmailUsuario] = useState<string | null>(null); // <- email
   const [enviando, setEnviando] = useState(false);
   const [mensagem, setMensagem] = useState("");
-
-  // ✅ Aqui é seguro acessar localStorage
-  useEffect(() => {
-    try {
-      if (typeof window !== "undefined") {
-        const email = localStorage.getItem("email");
-        setEmailUsuario(email);
-      }
-    } catch (error) {
-      alert("Erro ao obter o email do usuário: " + error);
-    }
-  }, []);
 
   const formatarDataHoje = () => {
     const hoje = new Date();
@@ -28,11 +15,6 @@ export default function EnvioResumo() {
   };
 
   const handleEnviarResumo = async () => {
-    if (!emailUsuario) {
-      setMensagem("Email do usuário não encontrado. Faça login novamente.");
-      return;
-    }
-
     if (tipoFiltro === "intervalo" && (!dataInicio || !dataFim)) {
       setMensagem("Por favor, selecione as datas de início e fim.");
       return;
@@ -125,13 +107,13 @@ export default function EnvioResumo() {
       )}
 
       {/* Exibir email */}
-      {emailUsuario && (
+      {localStorage.getItem("email") && (
         <div className="mb-6">
           <label className="block text-white text-sm font-medium mb-2">
             Email de Destino
           </label>
           <div className="w-full px-3 py-2 bg-gray-700/50 text-white rounded-lg border border-gray-600">
-            {emailUsuario}
+            {localStorage.getItem("email")}
           </div>
           <p className="text-gray-400 text-xs mt-1">
             O resumo será enviado para o email da sua conta

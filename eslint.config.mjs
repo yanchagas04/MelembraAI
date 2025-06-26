@@ -15,6 +15,7 @@ const eslintConfig = [
     rules: {
       "@next/next/no-html-link-for-pages": "off",
       "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-undefined": "off",
     },
   },
 ];

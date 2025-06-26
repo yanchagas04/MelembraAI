@@ -11,7 +11,7 @@ export default function EnvioResumoPage() {
       const nome = localStorage.getItem("nome") || "Seu nome aqui";
       setNome(nome);
     } catch (error) {
-      alert("Erro ao obter o nome do usuário: " + error);
+      console.log("Erro ao obter o nome do usuário: " + error);
     }
   });
 

@@ -39,7 +39,7 @@ export default function AdicionarTarefa() {
     const response = await criarTarefa(novaTarefa);
     console.log(response);
     if (response.activity === undefined) {
-      alert("Erro ao criar tarefa!");
+      console.log("Erro ao criar tarefa!");
     }
 
     // Limpa os campos

@@ -34,7 +34,7 @@ export default function TarefaCard(props: Tarefa){
                     if (res.activity) {
                         setChecked(!checked);
                     } else {
-                        alert("Erro ao marcar/desmarcar a conclusão!");
+                        console.log("Erro ao marcar/desmarcar a conclusão!");
                     }
                 }}><img src={checked ? checkedIcon.src : uncheckedIcon.src} alt="edit" className="w-8"/></button>
             </div>

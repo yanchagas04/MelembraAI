@@ -99,7 +99,7 @@ export default function MinhaConta() {
                     </label>
                 </form>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
-                        onClick={() => {alert("Esta funcionalidade estará disponível em breve.")}}>
+                        onClick={() => {console.log("Esta funcionalidade estará disponível em breve.")}}>
                         Salvar (em breve)
                     </button>
             </div>

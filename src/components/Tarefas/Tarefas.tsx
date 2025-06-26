@@ -38,7 +38,7 @@ export default function Tarefas() {
           tasks = [];
         }
         getTarefas();
-      }, []);
+      }, [tarefas]);
     return (
           <div id="tarefas" className="flex flex-col items-center gap-4 w-full">
             <div className="relative w-full md:w-3/4 max-w-2xl">

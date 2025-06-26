@@ -1,15 +1,24 @@
-<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
-	<title>email (1)</title>
-	<defs>
-		<image  width="34" height="28" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAMAAAAz6Z0tAAAAAXNSR0IB2cksfwAAAMNQTFRFAAAA////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wYQtnwAAAEF0Uk5TACU/QEnw/0ReXfb1IXLYKdlsnWCZq6UJquDUK9feWvdW1p8nnghhv2LE0/JXHLSvGhExMA/AwpxxbiRbvi8MPQtEktvcAAABJElEQVR4nM2TQUvDQBCF36sRUkQraYNKJSio6EFESkVE/O2CerJIDx4EKWqlYERFoVVDinE2G6KJu3p1DjO7M9/O24UdQowkTJYkiaoCjgVIoUokiPthBZRNvJHV8a/IJDkdAS5fjOUaX4EpekOFuo8Gov4ei5+hrxvMMiwBc8lzGj2F1FWLxqgo1uS94kKNeLHq6DT6ZZEFyjmN3NW8gaQXR2FBxPV7fo5kueaTFtMnAl7iGwKsDXKx4GGsRK5lWUCy+y3fLLEncSVSvoTkr0QmYkCA9ds4jas8zzI/EGzyQvwGu7AiwLb8nc7X1oSU7N8h8qW2Tq3ITlfeuHsGzPctRCD9W9zrWMqZOZU/h6R9IlPWGl7Z78IjpIN4wGMjsM9D8Z/7R3lKYFMM0QAAAABJRU5ErkJggg=="/>
-	</defs>
-	<style>
-		.s0 { fill: none;stroke: #000000;stroke-linecap: round;stroke-linejoin: round;stroke-width: 3.3 } 
-		.s1 { fill: none;stroke: #000000;stroke-linecap: round;stroke-width: 3.3 } 
-	</style>
-	<g id="surface1">
-		<path fill-rule="evenodd" class="s0" d="m6.7 11.7l10.3 7.7c1.8 1.4 4.2 1.4 6 0l10.3-7.7"/>
-		<path class="s1" d="m8.3 8.3h23.4c1.8 0 3.3 1.5 3.3 3.4v16.6c0 1.9-1.5 3.4-3.3 3.4h-23.4c-1.8 0-3.3-1.5-3.3-3.4v-16.6c0-1.9 1.5-3.4 3.3-3.4z"/>
-		<use id="Camada 1" href="#img1" x="3" y="6"/>
-	</g>
+<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" version="1.1">
+  <g class="layer">
+    <title>Layer 1</title>
+    <g id="surface1">
+      <path d="m4,7l6.2,4.65c1.07,0.8 2.53,0.8 3.6,0l6.2,-4.65"
+            fill="none"
+            id="svg_1"
+            stroke="white"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-miterlimit="4"
+            stroke-width="2"
+            transform="matrix(1.666667,0,0,1.666667,0,0)"/>
+      <path d="m5,5l14,0c1.1,0 2,0.89 2,2l0,10c0,1.11 -0.9,2 -2,2l-14,0c-1.1,0 -2,-0.89 -2,-2l0,-10c0,-1.11 0.9,-2 2,-2zm0,0"
+            fill="none"
+            id="svg_2"
+            stroke="white"
+            stroke-linecap="round"
+            stroke-miterlimit="4"
+            stroke-width="2"
+            transform="matrix(1.666667,0,0,1.666667,0,0)"/>
+    </g>
+  </g>
 </svg>

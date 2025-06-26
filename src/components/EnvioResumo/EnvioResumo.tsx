@@ -1,8 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { envioResumoFunction } from "./envioResumoFunction";
-
-const email = () => localStorage.getItem("email") || "";
 
 export default function EnvioResumo() {
   const [tipoFiltro, setTipoFiltro] = useState<"hoje" | "intervalo">("hoje");
@@ -10,6 +8,12 @@ export default function EnvioResumo() {
   const [dataFim, setDataFim] = useState("");
   const [enviando, setEnviando] = useState(false);
   const [mensagem, setMensagem] = useState("");
+  const [email, setEmail] = useState("");
+
+  // Carrega o email do localStorage quando o componente monta
+  useEffect(() => {
+    setEmail(localStorage.getItem("email") || "");
+  }, []);
 
   const formatarDataHoje = () => {
     const hoje = new Date();
@@ -30,18 +34,24 @@ export default function EnvioResumo() {
     setEnviando(true);
     setMensagem("");
 
-    const resultado = await envioResumoFunction({
-      tipoFiltro,
-      dataInicio,
-      dataFim,
-    });
+    try {
+      const resultado = await envioResumoFunction({
+        tipoFiltro,
+        dataInicio,
+        dataFim,
+      });
 
-    setMensagem(resultado.message);
-    setEnviando(false);
+      setMensagem(resultado.message);
 
-    if (resultado.success) {
-      setDataInicio("");
-      setDataFim("");
+      if (resultado.success) {
+        setDataInicio("");
+        setDataFim("");
+      }
+    } catch (error) {
+      setMensagem("Ocorreu um erro ao enviar o resumo.");
+      console.error("Erro no envio:", error);
+    } finally {
+      setEnviando(false);
     }
   };
 
@@ -109,13 +119,13 @@ export default function EnvioResumo() {
       )}
 
       {/* Exibir email */}
-      {email() && (
+      {email && (
         <div className="mb-6">
           <label className="block text-white text-sm font-medium mb-2">
             Email de Destino
           </label>
           <div className="w-full px-3 py-2 bg-gray-700/50 text-white rounded-lg border border-gray-600">
-            {email()}
+            {email}
           </div>
           <p className="text-gray-400 text-xs mt-1">
             O resumo será enviado para o email da sua conta
@@ -140,7 +150,8 @@ export default function EnvioResumo() {
       {mensagem && (
         <div
           className={`mt-4 p-3 rounded-lg text-center ${
-            mensagem.includes("sucesso")
+            mensagem.toLowerCase().includes("sucesso") || 
+            mensagem.toLowerCase().includes("success")
               ? "bg-green-600/20 text-green-300 border border-green-600"
               : "bg-red-600/20 text-red-300 border border-red-600"
           }`}

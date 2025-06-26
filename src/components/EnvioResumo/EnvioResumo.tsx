@@ -87,8 +87,8 @@ const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/summary/sen
       setMensagem(errorData.message || "Erro ao enviar resumo. Tente novamente.");
     }
   } catch (error) {
-    console.log("Erro ao enviar resumo:", error);
-    setMensagem(`Erro ao enviar resumo: ${error instanceof Error ? error.message : "Verifique sua conexão"}`);
+  console.log(error);
+  setMensagem("Erro ao enviar resumo. Verifique sua conexão.");
   } finally {
     setEnviando(false);
   }

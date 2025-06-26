@@ -24,63 +24,74 @@ export default function EnvioResumo() {
     return data.toISOString().split('T')[0];
   };
 
-  const handleEnviarResumo = async () => {
-    if (!emailUsuario) {
-      setMensagem("Email do usuário não encontrado. Faça login novamente.");
+const handleEnviarResumo = async () => {
+  if (!emailUsuario) {
+    setMensagem("Email do usuário não encontrado. Faça login novamente.");
+    return;
+  }
+
+  if (tipoFiltro === "intervalo" && (!dataInicio || !dataFim)) {
+    setMensagem("Por favor, selecione as datas de início e fim.");
+    return;
+  }
+
+  if (tipoFiltro === "intervalo" && new Date(dataInicio) > new Date(dataFim)) {
+    setMensagem("A data de início deve ser anterior à data de fim.");
+    return;
+  }
+
+  setEnviando(true);
+  setMensagem("");
+
+  try {
+    let dataInicioFormatada, dataFimFormatada;
+
+    if (tipoFiltro === "hoje") {
+      const hoje = new Date();
+      dataInicioFormatada = formatarDataParaAPI(hoje);
+      dataFimFormatada = formatarDataParaAPI(hoje);
+    } else {
+      dataInicioFormatada = dataInicio;
+      dataFimFormatada = dataFim;
+    }
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setMensagem("Sessão expirada. Faça login novamente.");
       return;
     }
 
-    if (tipoFiltro === "intervalo" && (!dataInicio || !dataFim)) {
-      setMensagem("Por favor, selecione as datas de início e fim.");
-      return;
+const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/summary/send`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        includeCompleted: true,
+        includePending: true,
+        dateRange: tipoFiltro === "intervalo" ? {
+          start: dataInicioFormatada,
+          end: dataFimFormatada
+        } : undefined
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setMensagem(data.message || "Resumo enviado com sucesso para seu email!");
+      setDataInicio("");
+      setDataFim("");
+    } else {
+      const errorData = await response.json();
+      setMensagem(errorData.message || "Erro ao enviar resumo. Tente novamente.");
     }
-
-    if (tipoFiltro === "intervalo" && new Date(dataInicio) > new Date(dataFim)) {
-      setMensagem("A data de início deve ser anterior à data de fim.");
-      return;
-    }
-
-    setEnviando(true);
-    setMensagem("");
-
-    try {
-      let dataInicioFormatada, dataFimFormatada;
-
-      if (tipoFiltro === "hoje") {
-        const hoje = new Date();
-        dataInicioFormatada = formatarDataParaAPI(hoje);
-        dataFimFormatada = formatarDataParaAPI(hoje);
-      } else {
-        dataInicioFormatada = dataInicio;
-        dataFimFormatada = dataFim;
-      }
-
-      // Aqui você faria a chamada para a API
-      const response = await fetch("/api/enviar-resumo", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: emailUsuario,
-          dataInicio: dataInicioFormatada,
-          dataFim: dataFimFormatada,
-        }),
-      });
-
-      if (response.ok) {
-        setMensagem("Resumo enviado com sucesso para seu email!");
-        setDataInicio("");
-        setDataFim("");
-      } else {
-        setMensagem("Erro ao enviar resumo. Tente novamente.");
-      }
-    } catch (error) {
-      setMensagem("Erro ao enviar resumo. Verifique sua conexão.");
-    } finally {
-      setEnviando(false);
-    }
-  };
+  } catch (error) {
+    setMensagem("Erro ao enviar resumo. Verifique sua conexão.");
+  } finally {
+    setEnviando(false);
+  }
+};
 
   return (
     <div className="w-full max-w-2xl mx-auto bg-white/10 backdrop-blur-sm rounded-lg p-6 shadow-lg">

@@ -23,7 +23,13 @@ export default function BarraLateral(props: BarraLateralProps) {
         },
         {
             icone: icone_calendario.src,
-            texto: " Agenda"
+            texto: " Agenda",
+            onClick: () => router.push("/AreaLogada")
+        },
+        {
+            icone: icone_calendario.src,
+            texto: " Enviar Resumo",
+            onClick: () => router.push("/EnvioResumo")
         },
         {
             icone: icone_config.src,

@@ -47,7 +47,6 @@ export default function AdicionarTarefa() {
     setTarefa("");
     setData("");
     setIsOpen(false);
-    window.location.reload();
   };
 
   const handleClose = () => {

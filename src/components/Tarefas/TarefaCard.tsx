@@ -15,10 +15,7 @@ export default function TarefaCard(props: Tarefa){
         <div className={`flex flex-row-reverse gap-2 w-full md:w-3/4 rounded-xl ${checked ? "bg-gradient-to-br from-gray-400 to-gray-600 text-white" : "bg-gray-200"} shadow-2xl hover:bg-gray-300 hover:scale-[101%] transition-all ease-in-out duration-300 p-4 text-black`} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <div className={`${hovered ? "w-8" : "w-0"} flex flex-col gap-2 items-center justify-center transition-all ease-in-out duration-300 h-full`}>
                 <button className="cursor-pointer hover:bg-red-500 rounded-md p-1 transition-all ease-in-out duration-300 items-center" onMouseEnter={() => setDeleteH(true)} onMouseLeave={() => setDeleteH(false)} onClick={async () => {
-                    const res = await deletarTarefa(props.id);
-                    if (res.message == 'Atividade excluída com sucesso') {
-                        window.location.reload();
-                    }
+                   await deletarTarefa(props.id);
                 }}><img src={!deleteH ? deleteIcon.src : deleteIconWhite.src} alt="delete" className="w-8" /></button>
             </div>
             <div className="flex flex-col w-full">

@@ -7,7 +7,12 @@ export default function EnvioResumoPage() {
   const [nome, setNome] = useState("");
 
   useState(() => {
-    setNome(localStorage.getItem("nome") || "Seu nome aqui");
+    try {
+      const nome = localStorage.getItem("nome") || "Seu nome aqui";
+      setNome(nome);
+    } catch (error) {
+      alert("Erro ao obter o nome do usuário: " + error);
+    }
   });
 
   return (

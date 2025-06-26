@@ -12,9 +12,13 @@ export default function EnvioResumo() {
 
   // ✅ Aqui é seguro acessar localStorage
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const email = localStorage.getItem("email");
-      setEmailUsuario(email);
+    try {
+      if (typeof window !== "undefined") {
+        const email = localStorage.getItem("email");
+        setEmailUsuario(email);
+      }
+    } catch (error) {
+      alert("Erro ao obter o email do usuário: " + error);
     }
   }, []);
 

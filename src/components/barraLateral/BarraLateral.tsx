@@ -15,19 +15,25 @@ export default function BarraLateral(props: BarraLateralProps) {
     const [open, setOpen] = useState(false);
     const router = useRouter();
 
-    const opcoes : OpcaoBarraProps[] = [
+    const opcoes: OpcaoBarraProps[] = [
         {
             icone: icone_pessoa.src,
-            texto: " Minha Conta",
+            texto: "Minha Conta",
             onClick: () => router.push("/MinhaConta")
         },
         {
             icone: icone_calendario.src,
-            texto: " Agenda"
+            texto: "Agenda",
+            onClick: () => router.push("/")
+        },
+        {
+            icone: "/BarraLateral/email.svg", // Caminho para o novo ícone de email
+            texto: "Enviar Resumo",
+            onClick: () => router.push("/EnvioResumo")
         },
         {
             icone: icone_config.src,
-            texto: " Logout",
+            texto: "Logout",
             onClick: () => {
                 localStorage.clear();
                 router.push("/");

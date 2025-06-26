@@ -18,7 +18,7 @@ export default function MinhaConta() {
             <div className="minha-conta flex flex-col w-full text-center gap-4">
                 <h1 className="text-2xl">Minha Conta</h1>
                 <img
-                    src={foto_perfil}
+                    src={foto_perfil || "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"}
                     alt="Foto de perfil"
                     className="w-50 h-50 rounded-full object-cover mx-auto"
                 />
@@ -99,7 +99,7 @@ export default function MinhaConta() {
                     </label>
                 </form>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
-                        onClick={() => {alert("Esta funcionalidade estará disponível em breve.")}}>
+                        onClick={() => {console.log("Esta funcionalidade estará disponível em breve.")}}>
                         Salvar (em breve)
                     </button>
             </div>

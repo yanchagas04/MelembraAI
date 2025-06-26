@@ -11,13 +11,11 @@ export default function EnvioResumo() {
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    // Verifica se está no cliente antes de acessar localStorage
-    if (typeof window !== 'undefined') {
-      const email = window.localStorage.getItem("email") || "usuario@exemplo.com";
-      const token = window.localStorage.getItem("token");
-      setEmailUsuario(email);
-      setToken(token);
-    }
+    // Só executa no cliente
+    if (typeof window === 'undefined') return;
+
+    setEmailUsuario(localStorage.getItem("email") || "usuario@exemplo.com");
+    setToken(localStorage.getItem("token"));
   }, []);
 
   const formatarDataHoje = () => {

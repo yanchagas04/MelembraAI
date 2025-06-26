@@ -3,7 +3,6 @@ import uncheckedIcon from "../../../public/Tarefas/unchecked.svg";
 import checkedIcon from "../../../public/Tarefas/check.svg";
 import deleteIcon from "../../../public/Tarefas/delete.svg";
 import deleteIconWhite from "../../../public/Tarefas/delete-white.svg";
-import editIcon from "../../../public/Tarefas/edit.svg";
 import { useState } from "react";
 import { deletarTarefa, editarTarefa } from "./tarefaFunction";
 

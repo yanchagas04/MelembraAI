@@ -1,16 +1,15 @@
 "use client"
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import TarefaCard from "./TarefaCard";
 import { Activity, DataContext, Tarefa } from "@/app/tipos";
 import pegarTarefas from "@/app/AreaLogada/tarefas";
-import { SearchBar } from "../Search/SearchBar";
 
 export default function Tarefas() {
     const data = useContext(DataContext);
     const [tarefas, setTarefas] = useState([] as Tarefa[]);
     const [filtro, setFiltro] = useState("")
     function filtrar() {
-      let filter = document.getElementById('searchInput') as HTMLInputElement
+      const filter = document.getElementById('searchInput') as HTMLInputElement
       setFiltro(filter.value)
     }
     useMemo(() => {

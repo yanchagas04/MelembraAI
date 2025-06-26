@@ -1,6 +1,6 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
-import { Search, X } from 'lucide-react';
+import React from 'react';
+import { Search} from 'lucide-react';
 
 interface SearchBarProps {
   changeFiltro: (value: string) => void;

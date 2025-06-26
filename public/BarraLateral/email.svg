@@ -1,7 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40px" height="40px" viewBox="0 0 40 40" version="1.1">
-<g id="surface1">
-<path style="fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 4.000781 7.000781 L 10.2 11.650781 C 11.266406 12.45 12.733594 12.45 13.8 11.650781 L 19.999219 7.000781 " transform="matrix(1.666667,0,0,1.666667,0,0)"/>
-<path style="fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 4.999219 4.999219 L 19.000781 4.999219 C 20.104687 4.999219 21 5.894531 21 7.000781 L 21 16.999219 C 21 18.105469 20.104687 19.000781 19.000781 19.000781 L 4.999219 19.000781 C 3.895312 19.000781 3 18.105469 3 16.999219 L 3 7.000781 C 3 5.894531 3.895312 4.999219 4.999219 4.999219 Z M 4.999219 4.999219 " transform="matrix(1.666667,0,0,1.666667,0,0)"/>
-</g>
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+	<title>email (1)</title>
+	<defs>
+		<image  width="34" height="28" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAMAAAAz6Z0tAAAAAXNSR0IB2cksfwAAAMNQTFRFAAAA////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wYQtnwAAAEF0Uk5TACU/QEnw/0ReXfb1IXLYKdlsnWCZq6UJquDUK9feWvdW1p8nnghhv2LE0/JXHLSvGhExMA/AwpxxbiRbvi8MPQtEktvcAAABJElEQVR4nM2TQUvDQBCF36sRUkQraYNKJSio6EFESkVE/O2CerJIDx4EKWqlYERFoVVDinE2G6KJu3p1DjO7M9/O24UdQowkTJYkiaoCjgVIoUokiPthBZRNvJHV8a/IJDkdAS5fjOUaX4EpekOFuo8Gov4ei5+hrxvMMiwBc8lzGj2F1FWLxqgo1uS94kKNeLHq6DT6ZZEFyjmN3NW8gaQXR2FBxPV7fo5kueaTFtMnAl7iGwKsDXKx4GGsRK5lWUCy+y3fLLEncSVSvoTkr0QmYkCA9ds4jas8zzI/EGzyQvwGu7AiwLb8nc7X1oSU7N8h8qW2Tq3ITlfeuHsGzPctRCD9W9zrWMqZOZU/h6R9IlPWGl7Z78IjpIN4wGMjsM9D8Z/7R3lKYFMM0QAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		.s0 { fill: none;stroke: #000000;stroke-linecap: round;stroke-linejoin: round;stroke-width: 3.3 } 
+		.s1 { fill: none;stroke: #000000;stroke-linecap: round;stroke-width: 3.3 } 
+	</style>
+	<g id="surface1">
+		<path fill-rule="evenodd" class="s0" d="m6.7 11.7l10.3 7.7c1.8 1.4 4.2 1.4 6 0l10.3-7.7"/>
+		<path class="s1" d="m8.3 8.3h23.4c1.8 0 3.3 1.5 3.3 3.4v16.6c0 1.9-1.5 3.4-3.3 3.4h-23.4c-1.8 0-3.3-1.5-3.3-3.4v-16.6c0-1.9 1.5-3.4 3.3-3.4z"/>
+		<use id="Camada 1" href="#img1" x="3" y="6"/>
+	</g>
 </svg>

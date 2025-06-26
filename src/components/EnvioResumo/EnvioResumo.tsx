@@ -6,13 +6,16 @@ export default function EnvioResumo() {
   const [tipoFiltro, setTipoFiltro] = useState<"hoje" | "intervalo">("hoje");
   const [dataInicio, setDataInicio] = useState("");
   const [dataFim, setDataFim] = useState("");
-  const [emailUsuario, setEmailUsuario] = useState("");
+  const [emailUsuario, setEmailUsuario] = useState<string | null>(null); // <- email
   const [enviando, setEnviando] = useState(false);
   const [mensagem, setMensagem] = useState("");
 
+  // ✅ Aqui é seguro acessar localStorage
   useEffect(() => {
-    const email = localStorage.getItem("email") || "usuario@exemplo.com";
-    setEmailUsuario(email);
+    if (typeof window !== "undefined") {
+      const email = localStorage.getItem("email");
+      setEmailUsuario(email);
+    }
   }, []);
 
   const formatarDataHoje = () => {
@@ -60,7 +63,7 @@ export default function EnvioResumo() {
         Enviar Resumo por Email
       </h1>
 
-      {/* Seleção do tipo de filtro */}
+      {/* Filtro de período */}
       <div className="mb-6">
         <label className="block text-white text-sm font-medium mb-3">
           Período do Resumo
@@ -89,7 +92,7 @@ export default function EnvioResumo() {
         </div>
       </div>
 
-      {/* Seleção de intervalo de datas */}
+      {/* Datas se filtro for "intervalo" */}
       {tipoFiltro === "intervalo" && (
         <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -117,20 +120,22 @@ export default function EnvioResumo() {
         </div>
       )}
 
-      {/* Campo de email */}
-      <div className="mb-6">
-        <label className="block text-white text-sm font-medium mb-2">
-          Email de Destino
-        </label>
-        <div className="w-full px-3 py-2 bg-gray-700/50 text-white rounded-lg border border-gray-600">
-          {emailUsuario}
+      {/* Exibir email */}
+      {emailUsuario && (
+        <div className="mb-6">
+          <label className="block text-white text-sm font-medium mb-2">
+            Email de Destino
+          </label>
+          <div className="w-full px-3 py-2 bg-gray-700/50 text-white rounded-lg border border-gray-600">
+            {emailUsuario}
+          </div>
+          <p className="text-gray-400 text-xs mt-1">
+            O resumo será enviado para o email da sua conta
+          </p>
         </div>
-        <p className="text-gray-400 text-xs mt-1">
-          O resumo será enviado para o email da sua conta
-        </p>
-      </div>
+      )}
 
-      {/* Botão de envio */}
+      {/* Botão */}
       <button
         onClick={handleEnviarResumo}
         disabled={enviando}
@@ -143,7 +148,7 @@ export default function EnvioResumo() {
         {enviando ? "Enviando..." : "Enviar Resumo"}
       </button>
 
-      {/* Mensagem de feedback */}
+      {/* Mensagem de retorno */}
       {mensagem && (
         <div
           className={`mt-4 p-3 rounded-lg text-center ${
@@ -156,7 +161,7 @@ export default function EnvioResumo() {
         </div>
       )}
 
-      {/* Informações adicionais */}
+      {/* Info extra */}
       <div className="mt-6 p-4 bg-blue-600/20 rounded-lg border border-blue-600">
         <h3 className="text-blue-300 font-medium mb-2">Sobre o Resumo</h3>
         <p className="text-blue-200 text-sm">
@@ -167,4 +172,3 @@ export default function EnvioResumo() {
     </div>
   );
 }
-
